@@ -1,0 +1,17 @@
+{
+  "name": "zitron-task",
+  "version": "1.0.0",
+  "description": "A Simple voting system.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --watch --env-file=.env app.js"
+  },
+  "author": "Sepehr Yahyaee",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "prisma": "^5.18.0"
+  }
+}
