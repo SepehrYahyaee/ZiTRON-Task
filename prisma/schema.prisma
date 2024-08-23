@@ -6,3 +6,41 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  userName String @db.VarChar(30) @unique
+  password String @db.VarChar(255)
+  role Role @default(USER)
+  plans Plan[]
+  votes Vote[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Plan {
+  id Int @id @default(autoincrement())
+  text String @db.VarChar(255)
+  deadline DateTime
+  authorId Int
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  votes Vote[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Vote {
+  id Int @id @default(autoincrement())
+  byUser Int
+  user User @relation(fields: [byUser], references: [id], onDelete: Cascade)
+  onPlan Int
+  plan Plan @relation(fields: [onPlan], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([byUser, onPlan])
+}
