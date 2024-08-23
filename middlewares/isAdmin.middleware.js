@@ -1,7 +1,9 @@
+import { AppError } from "../utilities/index.js";
+
 export async function isAdmin(req, res, next) {
     try {
         if (req.user.role === "USER") {
-            res.status(403).send("Not an Admin!");
+            throw new AppError("Not an Admin!", 403);
         } else {
             next();
         }

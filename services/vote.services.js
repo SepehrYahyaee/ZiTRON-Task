@@ -11,9 +11,15 @@ export const voteService = {
         })
     },
 
-    getVote() {},
+    async getSpecificVote(byUser, onPlan) {
+        return await this.db.vote.findUnique({
+            where: {
+                byUser_onPlan: {
+                    byUser,
+                    onPlan,
+                }
+            }
+        })
+    },
 
-    updateVote() {},
-
-    deleteVote() {},
 }

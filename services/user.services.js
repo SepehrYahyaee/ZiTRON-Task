@@ -3,9 +3,6 @@ import connection from "../db.js";
 export const userService = {
     db: connection,
 
-    // Not yet needed, since we have seeds.js and autofill for data!
-    async createUser() {},
-
     async getUser(userName) {
         return await this.db.user.findUnique({
             where: {
@@ -33,8 +30,4 @@ export const userService = {
             }
         })
     },
-
-    async updateUser() {},
-
-    async deleteUser() {},
 }

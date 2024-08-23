@@ -1,3 +1,4 @@
+import { AppError } from "../utilities/index.js";
 import jwt from "jsonwebtoken";
 
 export async function createToken(payload, secretKey, expireTime) {
@@ -5,6 +6,6 @@ export async function createToken(payload, secretKey, expireTime) {
         const accessToken = jwt.sign(payload, secretKey, { expiresIn: expireTime });
         return { accessToken };
     } catch (error) {
-        throw new Error(error);
+        throw new AppError("Failed to create the access token!", 500);
     }
 }

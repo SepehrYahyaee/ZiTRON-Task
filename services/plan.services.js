@@ -16,7 +16,7 @@ export const planService = {
     async getSpecificPlan(id) {
         return await this.db.plan.findUnique({
             where: {
-                id,
+                id: +id,
             }
         })
     }

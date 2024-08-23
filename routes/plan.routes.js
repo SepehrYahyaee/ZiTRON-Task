@@ -1,15 +1,16 @@
 import express from "express";
 import { userController, planController } from "../controllers/index.js";
 import { authentication, isAdmin } from "../middlewares/index.js";
+import { asyncErrorHandler } from "../utilities/index.js";
 
 export const router = express.Router(); // api/plan
 
+router.route("/new")
+    .post(authentication, isAdmin, asyncErrorHandler(planController.createPlan));
+
 router.route("/")
-    .get(planController.getPlans);
+    .get(asyncErrorHandler(planController.getAllPlans));
 
 router.route("/:id")
-    .get(planController.getSpecificPlan)
-    .post(authentication, userController.vote);
-
-router.route("/new")
-    .post(authentication, isAdmin, planController.createPlan);
+    .get(asyncErrorHandler(planController.getSpecificPlan))
+    .post(authentication, asyncErrorHandler(userController.vote));

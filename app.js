@@ -1,6 +1,7 @@
 import express from "express";
 import { userRoutes } from "./routes/index.js";
 import { planRoutes } from "./routes/index.js";
+import { globalErrorHandler } from "./utilities/index.js";
 
 const app = express();
 
@@ -12,11 +13,6 @@ app.use("/api/plan", planRoutes);
 app.get("/", (req, res) => {
     res.send("Hello and Welcome!");
 })
-
-function globalErrorHandler(error, req, res, next){
-    console.log(error);
-    res.send(error);
-}
 
 app.use(globalErrorHandler);
 
