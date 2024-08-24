@@ -93,14 +93,14 @@
 
 `git clone https://github.com/SepehrYahyaee/ZiTRON-Task.git`
 
-سپس فایل `.env` خودتان را بسازید تا متغیر های محیطی مورد نیاز را ست کنید:
+سپس فایل `env.` خودتان را بسازید تا متغیر های محیطی مورد نیاز را ست کنید:
 
 - `DATABASE_URL = postgresql://username:password@localhost:5432/dbName`
 - `PORT = 3000 or your desired port`
 - `SECRET_KEY = RandomSecretKey`
 - `TOKEN_EXPIRE_TIME = 1d`
 
-پس از آنکه فایل .env خود را ساختید با استفاده از دستورات زیر به ترتیب پروژه را می توانید اجرا کنید:
+پس از آنکه فایل env. خود را ساختید با استفاده از دستورات زیر به ترتیب پروژه را می توانید اجرا کنید:
 
 1. `npm install`
 2. `npm run db`
