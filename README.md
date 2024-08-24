@@ -90,16 +90,28 @@
 
 ## نحوه راه اندازی
 برای راه اندازی پروژه ابتدا دیتابیس PostgreSQL خودتون رو روی سیستم ران کرده و سپس می توانید این ریپازیتوری را clone کنید:
+
 `git clone https://github.com/SepehrYahyaee/ZiTRON-Task.git`
 
 سپس فایل `.env` خودتان را بسازید تا متغیر های محیطی مورد نیاز را ست کنید:
+
 `DATABASE_URL = postgresql://username:password@localhost:5432/dbName`
-`PORT = 3000` (Or your desired port)
+`PORT = 3000 or your desired port`
 `SECRET_KEY = RandomSecretKey`
-`TOKEN_EXPIRE_TIME = 1d` (access tokens expiration date)
+`TOKEN_EXPIRE_TIME = 1d`
 
 پس از آنکه فایل .env خود را ساختید با استفاده از دستورات زیر به ترتیب پروژه را می توانید اجرا کنید:
+
 1. `npm install`
 2. `npm run db`
 3. `npm run test`
 
+برای لاگین کردن و تست مسیر ها می توانید از دیتای زیر استفاده کنید:
+
+- userName: "Hasan" - password: "1234" - role: "ADMIN"
+- userName: "Heshmat" - password: "1234" - role: "USER"
+- userName: "Gholam" - password: "1234" - role: "USER"
+
+ازونجایی که مکانیزم رجیستر کردن هنوز پیاده سازی نشده به تبعیت از اون و صرفا برای تست این دیتا ها پیاده سازی شده و نیز مکانیزم Hashing برای وارد کردن پسورد ها درون دیتابیس پیاده سازی نشده است و صرفا چک کردن پسورد با String است!
+
+نهایتا نیز **API Documentation** برای آن پیاده سازی شده است با استفاده از Swagger که بعد از ران کردن پروژه می توانید با استفاده از مسیر `localhost:PORT/api-docs` آن را مشاهده بفرمایید.
