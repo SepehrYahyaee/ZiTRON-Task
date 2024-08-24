@@ -18,6 +18,7 @@
 <img src="./ERD.png" alt="ERD Model for this Task">
 <figcaption> <strong>ERD</strong> for this simple Voting System.</figcaption>
 </figure>
+
 تمامی فیلد ها و ارتباطات آنها در دیاگرام بالا مشخص است. کاربران می توانند اگر ادمین باشند طرح را ساخته و کاربران نیز می توانند رای ساخته و آن را به یک طرج انتساب کنند اما فقط یک بار به هر طرح می توانند رای بدهند.
 
 ## ساختار فولدربندی و Structure کد
@@ -86,4 +87,19 @@
 فایل app که محل اصلی اپلیکیشن ماست و محل اجرای سرور می باشد. فایل db نیز کانکشن متصل شونده به دیتابیس را به سرویس ها می فرستد که نیز بقیه فولدر ها برای ارتباط با دیتابیس از سرویس ها استفاده خواهند کرد.
 
 در هر فولدر نیز یک index.js وجود دارد که محل تجمیع توابع یا مقادیر قابل export در آن فولدر هستند برای اینکه در هنگام import کردن هر چیزی صرفا به این فابل رجوع کنیم.
+
+## نحوه راه اندازی
+برای راه اندازی پروژه ابتدا دیتابیس PostgreSQL خودتون رو روی سیستم ران کرده و سپس می توانید این ریپازیتوری را clone کنید:
+`git clone https://github.com/SepehrYahyaee/ZiTRON-Task.git`
+
+سپس فایل `.env` خودتان را بسازید تا متغیر های محیطی مورد نیاز را ست کنید:
+`DATABASE_URL = postgresql://username:password@localhost:5432/dbName`
+`PORT = 3000` (Or your desired port)
+`SECRET_KEY = RandomSecretKey`
+`TOKEN_EXPIRE_TIME = 1d` (access tokens expiration date)
+
+پس از آنکه فایل .env خود را ساختید با استفاده از دستورات زیر به ترتیب پروژه را می توانید اجرا کنید:
+1. `npm install`
+2. `npm run db`
+3. `npm run test`
 
