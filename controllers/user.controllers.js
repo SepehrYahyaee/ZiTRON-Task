@@ -1,6 +1,6 @@
 import { loginChecker, createToken } from "../providers/index.js";
 import { voteService, planService } from "../services/index.js";
-import { AppError } from "../utilities/index.js";
+import { AppError, logger } from "../utilities/index.js";
 
 export const userController = {
 
@@ -9,6 +9,7 @@ export const userController = {
         if (status) {
             // Create JWT Token
             res.status(200).send(await createToken({ id: status.id }, process.env.SECRET_KEY, process.env.TOKEN_EXPIRE_TIME));
+            return logger.info(`${req.body.userName} has logged in.`);
         } else {
             throw new AppError("Username or Password is Wrong!", 401);
         }
@@ -32,6 +33,7 @@ export const userController = {
 
             const vote = await voteService.createVote(+req.user.id, onPlan);
             res.status(201).send(vote);
+            return logger.info(`${req.user.userName} has voted on plan: ${plan.id}`);
         } else {
             throw new AppError("You cannot vote after the plan's expiry date!", 400);
         }
@@ -46,6 +48,7 @@ export const userController = {
         if (plan.deadline.getTime() < Date.now()) {
             const result = await planService.getResults(onPlan);
             res.status(200).send({ "voteNumbers": result.votes.length, result, });
+            return logger.info(`Admin ${req.user.userName}, saw the results of plan ${plan.id}`);
         } else {
             throw new AppError("Voting phase still on board!", 400);
         }

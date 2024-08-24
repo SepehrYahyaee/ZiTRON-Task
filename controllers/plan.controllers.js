@@ -1,5 +1,5 @@
 import { planService } from "../services/index.js";
-import { AppError } from "../utilities/index.js";
+import { AppError, logger } from "../utilities/index.js";
 
 export const planController = {
 
@@ -13,6 +13,7 @@ export const planController = {
         }
         
         res.status(201).send(await planService.createPlan(planData));
+        return logger.info(`new Plan created by "${req.user.userName}"`);
     },
 
     async getAllPlans(req, res) {
