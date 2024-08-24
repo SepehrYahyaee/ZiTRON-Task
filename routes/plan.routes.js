@@ -14,3 +14,6 @@ router.route("/")
 router.route("/:id")
     .get(asyncErrorHandler(planController.getSpecificPlan))
     .post(authentication, asyncErrorHandler(userController.vote));
+
+router.route("/:id/results")
+    .get(authentication, isAdmin, asyncErrorHandler(userController.seeResults));

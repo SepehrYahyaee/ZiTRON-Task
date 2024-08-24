@@ -19,5 +19,24 @@ export const planService = {
                 id: +id,
             }
         })
+    },
+
+    async getResults(id) {
+        return await this.db.plan.findUnique({
+            where: {
+                id,
+            },
+            include: {
+                votes: {
+                    select: {
+                        user: {
+                            select: {
+                                userName: true
+                            }
+                        }
+                    }
+                },
+            }
+        });
     }
 }

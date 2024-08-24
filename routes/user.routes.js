@@ -7,5 +7,3 @@ export const router = express.Router(); // api/user
 
 router.route("/login")
     .post(asyncErrorHandler(userController.login));
-
-// router.route("/")

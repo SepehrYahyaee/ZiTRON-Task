@@ -20,18 +20,34 @@ export const userController = {
         if (!plan) {
             throw new AppError("plan does not exist!", 404);
         }
-        const v = await voteService.getSpecificVote(+req.user.id, onPlan);
-        if (v.id) {
-            throw new AppError("You already voted!", 400);
-        }
         if (plan.deadline.getTime() > Date.now()) {
             if (plan.authorId === +req.user.id) {
                 throw new AppError("You cannot vote for your own plan!", 400);
             }
+
+            const v = await voteService.getSpecificVote(+req.user.id, onPlan);
+            if (v) {
+                throw new AppError("You already voted!", 400);
+            }
+
             const vote = await voteService.createVote(+req.user.id, onPlan);
             res.status(201).send(vote);
         } else {
             throw new AppError("You cannot vote after the plan's expiry date!", 400);
+        }
+    },
+
+    async seeResults(req, res) {
+        const onPlan = +req.params.id;
+        const plan = await planService.getSpecificPlan(onPlan);
+
+        if (!plan) throw new AppError("Plan does not exist", 404);
+
+        if (plan.deadline.getTime() < Date.now()) {
+            const result = await planService.getResults(onPlan);
+            res.status(200).send({ "voteNumbers": result.votes.length, result, });
+        } else {
+            throw new AppError("Voting phase still on board!", 400);
         }
     }
 }

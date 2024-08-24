@@ -4,6 +4,8 @@ import { AppError } from "../utilities/index.js";
 export const planController = {
 
     async createPlan(req, res) {
+        if (new Date(req.body.deadline).getTime() < Date.now()) throw new AppError("You cannot create a plan which it's deadline has already passed!", 400);
+
         const planData = {
             text: req.body.text,
             deadline: req.body.deadline,
